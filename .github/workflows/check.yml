@@ -30,7 +30,7 @@ jobs:
         env:
           # 已部署的检测 Worker
           CHECK_WORKER: "shturl.cc/I1laMKMwF05K0DVKqGOtPyUfoZUu54S5tb5kJ"
-          CHECK_CONCURRENCY: "6"
+          CHECK_CONCURRENCY: "1"
           CHECK_TIMEOUT: "90"
       # ==========新增：兜底创建public文件夹，防止找不到目录报错==========
       - name: Ensure public folder exists
