@@ -25,13 +25,16 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Get VPN Gate nodes + check via Cloudflare Worker + build page
-        run: python vpngate.py
-        continue-on-error: true # 新增：脚本检测失败不中断workflow，继续部署页面
+        run: |
+          python vpngate.py || echo "Python脚本执行异常，继续后续页面部署"
         env:
-          # 已部署的检测 Worker (不要改动: 检测统一走这里)
-          CHECK_WORKER: "shturl.cc/OPHNIic2wtgy6j2PEaPnWXfHU1IgLBB7CCtjv"
-          CHECK_CONCURRENCY: "6" # 修改：并发32 → 6，降低CF Worker压力
+          # 已部署的检测 Worker
+          CHECK_WORKER: "shturl.cc/I1laMKMwF05K0DVKqGOtPyUfoZUu54S5tb5kJ"
+          CHECK_CONCURRENCY: "6"
           CHECK_TIMEOUT: "90"
+      # ==========新增：兜底创建public文件夹，防止找不到目录报错==========
+      - name: Ensure public folder exists
+        run: mkdir -p public
       - name: Ensure GitHub Pages is enabled (one-time auto setup)
         run: |
           code=$(curl -s -o /dev/null -w '%{http_code}' \
