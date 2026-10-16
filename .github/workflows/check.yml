@@ -29,7 +29,7 @@ jobs:
           python vpngate.py || echo "Python脚本执行异常，继续后续页面部署"
         env:
           # 已部署的检测 Worker
-          CHECK_WORKER: "https://withered-lake-a859.zhuoliheng.workers.dev/check?sstp=vpn:vpn@"
+          CHECK_WORKER: "https://gazhuo.zhuoli.cc.cd/check?sstp=vpn:vpn@"
           CHECK_CONCURRENCY: "1"
           CHECK_TIMEOUT: "90"
       # ==========新增：兜底创建public文件夹，防止找不到目录报错==========
